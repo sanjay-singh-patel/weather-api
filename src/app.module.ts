@@ -1,13 +1,19 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CityModule } from 'src/module/city/city.module';
-import { WeatherModule } from 'src/module/weather/weather.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { CityModule } from './city/city.module';
+import { WeatherModule } from './weather/weather.module';
 
 @Module({
-  imports: [
-    MongooseModule.forRoot('mongodb://localhost/nest'),
+  imports: [ConfigModule.forRoot({
+    envFilePath: '.env',
+    isGlobal: true,
+  }),
+    MongooseModule.forRoot(process.env.DB_URI),
     CityModule,
     WeatherModule,
-  ],
+  ],  
 })
 export class AppModule {}
