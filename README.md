@@ -22,15 +22,20 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+# Weather API
+
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A api to get the weather data for multiple configured cities built using
+[Nest](https://github.com/nestjs/nest) framework ..
 
 ## Installation
 
+
 ```bash
+$ git clone <repository-url>
+$ cd <repository-name>
 $ npm install
-```
 
 ## Running the app
 
