@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { CityModule } from './city/city.module';
-import { WeatherModule } from './weather/weather.module';
+import { BasicStrategy } from './auth/basic.stratergy';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -13,7 +11,7 @@ import { WeatherModule } from './weather/weather.module';
   }),
     MongooseModule.forRoot(process.env.DB_URI),
     CityModule,
-    WeatherModule,
   ],  
+
 })
 export class AppModule {}
