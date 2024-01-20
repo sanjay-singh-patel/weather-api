@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CityModule } from './weather/city.module';
+import { CityModule } from './City/city.module';
 import { BasicStrategy } from './auth/basic.stratergy';
 import { AuthService } from './auth/auth.service'; // import AuthService
 
