@@ -17,8 +17,8 @@ export class CityService {
     return this.cityModel.create(city);
   }
   async getWeather() {
-    const cities = await this.getAllCities(); // use CityService to get cities
-    const weatherDataPromises = cities.map(city =>
+    const cities = await this.getAllCities(); 
+      const weatherDataPromises = cities.map(city =>
       this.httpService
         .get(`http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.OPENWEATHER_API_KEY}`) // assuming city is an object with a name property
         .pipe(map(response => response.data))

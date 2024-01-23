@@ -5,6 +5,11 @@ export class AuthService {
   validateAdmin(username: string, password: string): boolean {
     const adminUsername = process.env.ADMIN_USERNAME;
     const adminPassword = process.env.ADMIN_PASSWORD;
-    return username === adminUsername && password === adminPassword;
+    
+    if (username === adminUsername && password === adminPassword) {
+      return true;
+    } else {
+      throw new Error('Invalid credentials');
+    }
   }
 }

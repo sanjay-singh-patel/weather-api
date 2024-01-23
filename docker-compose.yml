@@ -28,6 +28,10 @@ services:
       - ./nginx/:/etc/nginx/conf.d
     depends_on:
       - app
+  test:
+    build: .
+    command: npm test
+
 volumes:
   db-store:
 
