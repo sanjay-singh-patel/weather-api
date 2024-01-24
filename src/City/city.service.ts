@@ -9,7 +9,6 @@ import { HttpService } from '@nestjs/axios';
 export class CityService {
   constructor(@InjectModel('City') private readonly cityModel: mongoose.Model<City>,private readonly httpService: HttpService) {}
 
-  // Get all cities from mongodb
   async getAllCities() {
     return await this.cityModel.find();
   }
@@ -17,14 +16,23 @@ export class CityService {
     return this.cityModel.create(city);
   }
   async getWeather() {
-    const cities = await this.getAllCities(); 
-      const weatherDataPromises = cities.map(city =>
-      this.httpService
-        .get(`http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.OPENWEATHER_API_KEY}`) // assuming city is an object with a name property
-        .pipe(map(response => response.data))
-        .toPromise(),
-    );
+    let cities = await this.cityModel.find(); 
+    if (!cities) {
+      throw new Error('Failed to fetch cities');
+    }
+      const weatherDataPromises = cities.map(async city =>{
+      const data = await this.httpService
+        .get(`http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.OPENWEATHER_API_KEY}`) 
+        .toPromise();
+      return {
+        City: data.data.name,
+        Country: data.data.sys.country,
+        Temperature: data.data.main.temp,
+        Weather: data.data.weather[0].main,
+        Sky:data.data.weather[0].description,
 
+      };
+  });
     const weatherData = await Promise.all(weatherDataPromises);
 
     return weatherData;
